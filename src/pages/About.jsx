@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import { ArrowRight, Check } from "lucide-react";
+import PageHead from "../components/PageHead";
+import { ABOUT_IMAGE } from "../data/services";
 
 const POINTS = [
   ["One studio for the whole look", "Makeup, mehndi, nails and hair are planned together so colours and styles agree."],
@@ -9,17 +12,24 @@ const POINTS = [
 export default function About() {
   return (
     <>
-      <section className="page-head">
-        <div className="wrap">
-          <h1>About Anita Studio</h1>
-          <p className="lead">A neighbourhood parlour for everyday care and for the biggest days of your life.</p>
-        </div>
-      </section>
+      <PageHead eyebrow="ABOUT ANITA STUDIO" title={<>Beauty built around <em>your style.</em></>}
+        text="A neighbourhood parlour for everyday care and for the biggest days of your life." />
       <section className="section">
-        <div className="wrap points">
-          {POINTS.map(([t, d]) => (<div key={t}><h3>{t}</h3><p className="muted">{d}</p></div>))}
+        <div className="wrap split about">
+          <img src={ABOUT_IMAGE} alt="" loading="lazy" />
+          <div>
+            <h2>One studio.<br /><em>Many ways to feel beautiful.</em></h2>
+            <div className="checks">
+              {POINTS.map(([t, d]) => (
+                <div key={t}>
+                  <Check />
+                  <span><strong>{t}</strong><small>{d}</small></span>
+                </div>
+              ))}
+            </div>
+            <Link className="gold" to="/contact">Book Appointment <ArrowRight size={18} /></Link>
+          </div>
         </div>
-        <p className="center"><Link className="btn" to="/contact">Book appointment</Link></p>
       </section>
     </>
   );

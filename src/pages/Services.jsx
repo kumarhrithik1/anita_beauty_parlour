@@ -1,47 +1,81 @@
 import { Link, useParams, Navigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { CATEGORIES } from "../data/services";
 import ServiceMedia from "../components/ServiceMedia";
+import PageHead from "../components/PageHead";
 
 export default function Services() {
   const { slug } = useParams();
-  const current = slug ? CATEGORIES.find((c) => c.slug === slug) : null;
-  if (slug && !current) return <Navigate to="/services" replace />;
-  const shown = current ? [current] : CATEGORIES;
+  const c = slug ? CATEGORIES.find((x) => x.slug === slug) : null;
+  if (slug && !c) return <Navigate to="/services" replace />;
+
+  if (!c) {
+    return (
+      <>
+        <PageHead eyebrow="OUR SERVICES" title={<>Beauty, <em>your way.</em></>}
+          text="Explore Anita Studio's five core services. Each service page lists its styles and shows our latest photos and videos." />
+        <section className="section top">
+          <div className="wrap serviceCategoryGrid">
+            {CATEGORIES.map((x) => (
+              <Link key={x.slug} className="serviceCategoryCard" to={`/services/${x.slug}`}>
+                <div className="serviceCategoryImage">
+                  <img src={x.image} alt="" loading="lazy" />
+                  <span aria-hidden="true">{x.icon}</span>
+                </div>
+                <div>
+                  <span className="eyebrow dark">{String(x.items.length).padStart(2, "0")} VARIATIONS</span>
+                  <h2>{x.name}</h2>
+                  <p>{x.intro}</p>
+                  <b>Explore {x.name} <ArrowRight size={14} /></b>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </>
+    );
+  }
 
   return (
     <>
-      <section className="page-head">
+      <PageHead eyebrow={`ANITA STUDIO • ${c.name.toUpperCase()}`} title={<>{c.name} <em>services.</em></>} text={c.intro} />
+      <section className="section top">
         <div className="wrap">
-          <h1>{current ? current.name : "Services"}</h1>
-          <p className="lead">{current ? current.intro : "Pick a service to see the styles we offer."}</p>
-        </div>
-      </section>
-      <section className="section">
-        <div className="wrap">
-          <div className="tabs">
-            <Link className={!current ? "tab on" : "tab"} to="/services">All</Link>
-            {CATEGORIES.map((c) => (
-              <Link key={c.slug} className={current?.slug === c.slug ? "tab on" : "tab"} to={`/services/${c.slug}`}>{c.name}</Link>
+          <div className="categoryIntro">
+            <div className="categoryIntroIcon" aria-hidden="true">{c.icon}</div>
+            <div>
+              <span className="eyebrow dark">CHOOSE YOUR STYLE</span>
+              <h2>{c.name}, personalised for you.</h2>
+              <p>Explore the {c.name.toLowerCase()} styles available at Anita Studio, then book the one that suits you.</p>
+            </div>
+          </div>
+          <div className="variationHeader">
+            <div>
+              <span className="eyebrow dark">VARIATIONS</span>
+              <h2>Choose a <em>style.</em></h2>
+            </div>
+            <span>{c.items.length} options</span>
+          </div>
+          <div className="variationGrid">
+            {c.items.map((i, idx) => (
+              <Link key={i.name} className="variationCard" to={`/contact?service=${encodeURIComponent(c.name)}`}>
+                <div className="variationImage">
+                  <img src={i.image} alt="" loading="lazy" />
+                  <span>{String(idx + 1).padStart(2, "0")}</span>
+                </div>
+                <div className="variationBody">
+                  <small>{c.name}</small>
+                  <h3>{i.name}</h3>
+                  <p>{i.note}</p>
+                  <b>Book this style <ArrowRight size={13} /></b>
+                </div>
+              </Link>
             ))}
           </div>
-          {shown.map((c) => (
-            <div key={c.slug} className="svc-block">
-              <img src={c.image} alt="" loading="lazy" className="svc-img" />
-              <div>
-                <h2>{c.name}</h2>
-                <ul className="svc-list">
-                  {c.items.map((i) => (
-                    <li key={i.name}><strong>{i.name}</strong><span>{i.note}</span></li>
-                  ))}
-                </ul>
-                <div className="row">
-                  <Link className="btn" to={`/contact?service=${encodeURIComponent(c.name)}`}>Book {c.name.toLowerCase()}</Link>
-                  {!current && <Link className="btn btn-ghost" to={`/services/${c.slug}`}>See photos and videos</Link>}
-                </div>
-              </div>
-            </div>
-          ))}
-          {current && <ServiceMedia category={current} />}
+          <p className="center">
+            <Link className="gold" to={`/contact?service=${encodeURIComponent(c.name)}`}>Book {c.name.toLowerCase()} <ArrowRight size={18} /></Link>
+          </p>
+          <ServiceMedia category={c} />
         </div>
       </section>
     </>
