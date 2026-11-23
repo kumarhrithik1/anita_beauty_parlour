@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays } from "lucide-react";
-import { CATEGORIES, HERO_SLIDES, TESTIMONIALS, ABOUT_IMAGE } from "../data/services";
+import { CATEGORIES, HERO_SLIDES, TESTIMONIALS, ABOUT_IMAGE, categoryMinPrice, typeMinPrice, fromPrice } from "../data/services";
 import VideoSection from "../components/VideoSection";
 
 function Hero() {
@@ -43,13 +43,14 @@ const FEATURES = [
 ];
 
 export default function Home() {
-  const featured = CATEGORIES.filter((c) => ["makeup", "mehndi"].includes(c.slug));
-  const more = CATEGORIES.filter((c) => ["skin-care", "nail-art", "hair-care"].includes(c.slug));
+  // Which categories are "featured" is controlled by "featured": true in each catalog JSON.
+  const featured = CATEGORIES.filter((c) => c.featured).slice(0, 2);
+  const more = CATEGORIES.filter((c) => !featured.includes(c));
   return (
     <>
       <Hero />
 
-      <section className="homeServices">
+      <section className="section homeServices">
         <div className="wrap">
           <div className="sectionTitle">
             <span className="eyebrow dark">OUR SERVICES</span>
@@ -59,36 +60,39 @@ export default function Home() {
           <div className="featuredServiceRows">
             {featured.map((c) => (
               <div className="serviceShowcase" key={c.slug}>
-                <div className="serviceHeading"><span>{c.icon}</span><h3>{c.name} Services</h3></div>
+                <div className="serviceHeading"><span aria-hidden="true">{c.icon}</span><h3>{c.name} Services</h3></div>
                 <div className="miniGrid">
-                  {c.items.map((x) => (
-                    <Link to={`/services/${c.slug}`} className="miniCard" key={x.name}>
-                      <img src={x.image} alt="" loading="lazy" />
-                      <span>{x.name}</span>
+                  {c.types.slice(0, 4).map((t) => (
+                    <Link to={`/services/${c.slug}`} className="miniCard" key={t.id}>
+                      <img src={t.image} alt="" loading="lazy" />
+                      <span className="miniName">{t.name}</span>
+                      <span className="miniPrice">{fromPrice(typeMinPrice(t))}</span>
                     </Link>
                   ))}
                 </div>
               </div>
             ))}
           </div>
-          <div className="moreServices">
-            <div className="moreServiceTitle">
-              <span>MORE BEAUTY SERVICES</span>
-              <p>Skin Care • Nail Art • Hair Care</p>
+          {more.length > 0 && (
+            <div className="moreServices">
+              <div className="moreServiceTitle">
+                <span>MORE BEAUTY SERVICES</span>
+                <p>{more.map((c) => c.name).join(" • ")}</p>
+              </div>
+              {more.map((c) => (
+                <Link key={c.slug} to={`/services/${c.slug}`} className="moreServiceCard">
+                  <img src={c.image} alt="" loading="lazy" />
+                  <div>
+                    <small>{c.icon} {c.types.length} styles · {fromPrice(categoryMinPrice(c))}</small>
+                    <h3>{c.name}</h3>
+                    <p>{c.intro}</p>
+                    <b>Explore <ArrowRight size={14} /></b>
+                  </div>
+                </Link>
+              ))}
             </div>
-            {more.map((c) => (
-              <Link key={c.slug} to={`/services/${c.slug}`} className="moreServiceCard">
-                <img src={c.image} alt="" loading="lazy" />
-                <div>
-                  <small>{c.icon} {c.items.length} variations</small>
-                  <h3>{c.name}</h3>
-                  <p>{c.intro}</p>
-                  <b>Explore <ArrowRight size={13} /></b>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <Link className="viewAll" to="/services">View All Services <ArrowRight size={15} /></Link>
+          )}
+          <Link className="viewAll" to="/services">View All Services <ArrowRight size={16} /></Link>
         </div>
       </section>
 
@@ -109,7 +113,10 @@ export default function Home() {
             <span className="eyebrow dark">ANITA STUDIO</span>
             <h2>Beauty that feels <em>like you.</em></h2>
             <p className="muted">From bridal transformations to everyday grooming, Anita Studio combines skilled artistry, premium products and a warm, personal experience.</p>
-            <Link className="gold darkGold" to="/about">Discover Anita Studio <ArrowRight size={18} /></Link>
+            <div className="row">
+              <Link className="gold darkGold" to="/about">Discover Anita Studio <ArrowRight size={18} /></Link>
+              <Link className="btn btn-ghost darkGold" to="/pricing">View pricing</Link>
+            </div>
           </div>
           <img src={ABOUT_IMAGE} alt="" loading="lazy" />
         </div>

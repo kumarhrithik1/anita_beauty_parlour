@@ -25,7 +25,24 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const { pathname } = useLocation();
+
   useEffect(() => { setOpen(false); setServicesOpen(false); window.scrollTo(0, 0); }, [pathname]);
+
+  // Stop the page scrolling behind the open mobile menu.
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  // Close the services dropdown on outside click or Escape.
+  useEffect(() => {
+    if (!servicesOpen) return;
+    const click = (e) => !e.target.closest(".serviceDrop") && setServicesOpen(false);
+    const key = (e) => e.key === "Escape" && setServicesOpen(false);
+    document.addEventListener("click", click);
+    window.addEventListener("keydown", key);
+    return () => { document.removeEventListener("click", click); window.removeEventListener("keydown", key); };
+  }, [servicesOpen]);
 
   return (
     <>
@@ -53,6 +70,7 @@ export default function Layout() {
                 ))}
               </div>
             </div>
+            <NavLink className={navClass} to="/pricing">Pricing</NavLink>
             <NavLink className={navClass} to="/gallery">Gallery</NavLink>
             <NavLink className={navClass} to="/videos">Videos</NavLink>
             <NavLink className={navClass} to="/testimonials">Testimonials</NavLink>
@@ -73,6 +91,7 @@ export default function Layout() {
           </div>
           <div className="footlinks">
             {CATEGORIES.map((c) => <Link key={c.slug} to={`/services/${c.slug}`}>{c.name}</Link>)}
+            <Link to="/pricing">Pricing</Link>
           </div>
           <div className="foot-contact">
             <p>{SITE.address}</p>

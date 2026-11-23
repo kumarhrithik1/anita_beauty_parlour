@@ -1,0 +1,41 @@
+{
+  "slug": "skin-care",
+  "name": "Skin Care",
+  "icon": "✨",
+  "order": 3,
+  "intro": "Facials, cleanups, glow care and bridal skin preparation.",
+  "image": "photo-1570172619644-dfd03ed5d881",
+  "types": [
+    {
+      "id": "facial", "name": "Signature facial", "note": "Deep cleanse and glow", "image": "photo-1570172619644-dfd03ed5d881",
+      "options": [
+        { "id": "fruit", "name": "Fruit facial", "price": 1200, "duration": "60 min" },
+        { "id": "gold", "name": "Gold facial", "price": 1800, "duration": "75 min" },
+        { "id": "anti-tan", "name": "Anti-tan glow facial", "price": 2200, "duration": "75 min" }
+      ]
+    },
+    {
+      "id": "cleanup", "name": "Cleanup", "note": "Quick refresh", "image": "photo-1556228578-0d85b1a4d571",
+      "options": [
+        { "id": "basic", "name": "Basic cleanup", "price": 700, "duration": "30 min" },
+        { "id": "deluxe", "name": "Deluxe cleanup", "price": 1000, "duration": "45 min" }
+      ]
+    },
+    {
+      "id": "bridal-prep", "name": "Bridal skin prep", "note": "Plan starts 4 weeks before", "image": "photo-1515377905703-c4788e51af15",
+      "options": [
+        { "id": "single", "name": "Single session", "price": 2500 },
+        { "id": "three", "name": "3-session plan", "price": 6500 },
+        { "id": "four", "name": "4-week bridal package", "price": 8500 }
+      ]
+    },
+    {
+      "id": "glow", "name": "Glow treatment", "note": "Before events", "image": "photo-1598440947619-2c35fc9aa908",
+      "options": [
+        { "id": "booster", "name": "Glow booster", "price": 2200, "duration": "60 min" },
+        { "id": "detan", "name": "De-tan (face & neck)", "price": 900, "duration": "30 min" },
+        { "id": "polish", "name": "Full body polish", "price": 3500, "duration": "90 min" }
+      ]
+    }
+  ]
+}

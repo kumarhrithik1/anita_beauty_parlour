@@ -1,6 +1,6 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { CATEGORIES } from "../data/services";
+import { CATEGORIES, bookUrl, categoryMinPrice, typeMinPrice, fromPrice, priceOf } from "../data/services";
 import ServiceMedia from "../components/ServiceMedia";
 import PageHead from "../components/PageHead";
 
@@ -13,7 +13,7 @@ export default function Services() {
     return (
       <>
         <PageHead eyebrow="OUR SERVICES" title={<>Beauty, <em>your way.</em></>}
-          text="Explore Anita Studio's five core services. Each service page lists its styles and shows our latest photos and videos." />
+          text={`Explore Anita Studio's ${CATEGORIES.length} core services. Each service page lists its styles with prices and shows our latest photos and videos.`} />
         <section className="section top">
           <div className="wrap serviceCategoryGrid">
             {CATEGORIES.map((x) => (
@@ -22,8 +22,8 @@ export default function Services() {
                   <img src={x.image} alt="" loading="lazy" />
                   <span aria-hidden="true">{x.icon}</span>
                 </div>
-                <div>
-                  <span className="eyebrow dark">{String(x.items.length).padStart(2, "0")} VARIATIONS</span>
+                <div className="serviceCategoryBody">
+                  <span className="eyebrow dark">{String(x.types.length).padStart(2, "0")} STYLES · {fromPrice(categoryMinPrice(x)).toUpperCase()}</span>
                   <h2>{x.name}</h2>
                   <p>{x.intro}</p>
                   <b>Explore {x.name} <ArrowRight size={14} /></b>
@@ -31,6 +31,7 @@ export default function Services() {
               </Link>
             ))}
           </div>
+          <p className="center"><Link className="btn btn-ghost" to="/pricing">See the full price list</Link></p>
         </section>
       </>
     );
@@ -46,34 +47,44 @@ export default function Services() {
             <div>
               <span className="eyebrow dark">CHOOSE YOUR STYLE</span>
               <h2>{c.name}, personalised for you.</h2>
-              <p>Explore the {c.name.toLowerCase()} styles available at Anita Studio, then book the one that suits you.</p>
+              <p>Explore the {c.name.toLowerCase()} styles available at Anita Studio, compare prices, then book the one that suits you.</p>
             </div>
           </div>
           <div className="variationHeader">
             <div>
-              <span className="eyebrow dark">VARIATIONS</span>
+              <span className="eyebrow dark">STYLES & PRICING</span>
               <h2>Choose a <em>style.</em></h2>
             </div>
-            <span>{c.items.length} options</span>
+            <span className="pill">{c.types.length} styles</span>
           </div>
           <div className="variationGrid">
-            {c.items.map((i, idx) => (
-              <Link key={i.name} className="variationCard" to={`/contact?service=${encodeURIComponent(c.name)}`}>
+            {c.types.map((t, idx) => (
+              <article key={t.id} className="variationCard">
                 <div className="variationImage">
-                  <img src={i.image} alt="" loading="lazy" />
+                  <img src={t.image} alt="" loading="lazy" />
                   <span>{String(idx + 1).padStart(2, "0")}</span>
                 </div>
                 <div className="variationBody">
-                  <small>{c.name}</small>
-                  <h3>{i.name}</h3>
-                  <p>{i.note}</p>
-                  <b>Book this style <ArrowRight size={13} /></b>
+                  <small>{c.name} · {fromPrice(typeMinPrice(t))}</small>
+                  <h3>{t.name}</h3>
+                  {t.note && <p>{t.note}</p>}
+                  <ul className="optionList">
+                    {t.options.map((o) => (
+                      <li key={o.id}>
+                        <Link to={bookUrl(c, t, o)} aria-label={`Book ${o.name}`}>
+                          <span className="optName">{o.name}{o.duration && <small>{o.duration}</small>}</span>
+                          <span className="price">{priceOf(o)}{o.unit && <small> / {o.unit}</small>}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link className="cardLink" to={bookUrl(c, t)}>Book this style <ArrowRight size={14} /></Link>
                 </div>
-              </Link>
+              </article>
             ))}
           </div>
           <p className="center">
-            <Link className="gold" to={`/contact?service=${encodeURIComponent(c.name)}`}>Book {c.name.toLowerCase()} <ArrowRight size={18} /></Link>
+            <Link className="gold" to={bookUrl(c)}>Book {c.name.toLowerCase()} <ArrowRight size={18} /></Link>
           </p>
           <ServiceMedia category={c} />
         </div>

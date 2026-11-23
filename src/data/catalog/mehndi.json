@@ -1,0 +1,43 @@
+{
+  "slug": "mehndi",
+  "name": "Mehndi",
+  "icon": "🌿",
+  "order": 2,
+  "featured": true,
+  "intro": "Bridal, Arabic, Rajasthani and minimal designs drawn by hand.",
+  "image": "photo-1603899122634-f086ca5f5ddd",
+  "types": [
+    {
+      "id": "bridal", "name": "Bridal Mehndi", "note": "Full hands and feet", "image": "photo-1603899122634-f086ca5f5ddd",
+      "options": [
+        { "id": "full", "name": "Full hands & feet", "price": 6000, "priceMax": 9000, "duration": "4-5 hrs" },
+        { "id": "hands", "name": "Hands only (to elbow)", "price": 3500, "priceMax": 5000, "duration": "2-3 hrs" },
+        { "id": "family", "name": "Bride + family package", "price": 9000, "priceMax": 14000 }
+      ]
+    },
+    {
+      "id": "arabic", "name": "Arabic Mehndi", "note": "Flowing florals, open space", "image": "photo-1594736797933-d0f06ba6d5a8",
+      "options": [
+        { "id": "one-hand", "name": "One hand", "price": 600, "duration": "20 min" },
+        { "id": "both-hands", "name": "Both hands", "price": 1000, "duration": "40 min" },
+        { "id": "full-arms", "name": "Full arms", "price": 1500, "duration": "1 hr" }
+      ]
+    },
+    {
+      "id": "rajasthani", "name": "Rajasthani / Traditional", "note": "Dense, heritage patterns", "image": "photo-1582552938357-32b906df40cb",
+      "options": [
+        { "id": "palm-back", "name": "Palm & back, both hands", "price": 1800, "duration": "1.5 hrs" },
+        { "id": "to-elbow", "name": "Full hands to elbow", "price": 2800, "duration": "2.5 hrs" },
+        { "id": "feet", "name": "Feet (add-on)", "price": 1200 }
+      ]
+    },
+    {
+      "id": "minimal", "name": "Minimal & Indo-Arabic", "note": "Quick and contemporary", "image": "photo-1599643478518-a784e5dc4c8f",
+      "options": [
+        { "id": "motif", "name": "Single motif", "price": 300, "duration": "10 min" },
+        { "id": "both", "name": "Both hands", "price": 600, "duration": "25 min" },
+        { "id": "feet", "name": "Feet", "price": 500, "duration": "20 min" }
+      ]
+    }
+  ]
+}

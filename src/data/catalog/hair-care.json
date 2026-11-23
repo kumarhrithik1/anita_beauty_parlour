@@ -1,0 +1,49 @@
+{
+  "slug": "hair-care",
+  "name": "Hair Care",
+  "icon": "💇‍♀️",
+  "order": 5,
+  "intro": "Haircuts, styling, spa, bridal hairstyles, colour and smoothening.",
+  "image": "photo-1522337360788-8b13dee7a37e",
+  "types": [
+    {
+      "id": "haircut", "name": "Haircut & Styling", "note": "Cut shaped to your face", "image": "photo-1562322140-8baeececf3df",
+      "options": [
+        { "id": "trim", "name": "Trim", "price": 300, "duration": "20 min" },
+        { "id": "layers", "name": "Layer / step cut", "price": 600, "duration": "45 min" },
+        { "id": "blowdry", "name": "Blow-dry & styling", "price": 500, "duration": "30 min" }
+      ]
+    },
+    {
+      "id": "spa", "name": "Hair spa", "note": "Repair and shine", "image": "photo-1521590832167-7bcbfaa6381f",
+      "options": [
+        { "id": "basic", "name": "Basic hair spa", "price": 1000, "priceMax": 1400, "duration": "60 min" },
+        { "id": "deep", "name": "Deep repair spa", "price": 1600, "priceMax": 2200, "duration": "75 min" }
+      ]
+    },
+    {
+      "id": "bridal", "name": "Bridal hairstyling", "note": "Updos, braids, buns", "image": "photo-1522337360788-8b13dee7a37e",
+      "options": [
+        { "id": "bun", "name": "Bun / updo", "price": 2500, "duration": "1 hr" },
+        { "id": "braids", "name": "Braids & floral styling", "price": 2000, "duration": "1 hr" },
+        { "id": "reception", "name": "Reception style with extensions", "price": 3000, "duration": "1.5 hrs" }
+      ]
+    },
+    {
+      "id": "colour", "name": "Hair colouring", "note": "Global colour and highlights", "image": "photo-1492707892479-7bc8d5a4ee93",
+      "options": [
+        { "id": "root", "name": "Root touch-up", "price": 1200, "duration": "60 min" },
+        { "id": "global", "name": "Global colour", "price": 3500, "priceMax": 6000, "duration": "2-3 hrs" },
+        { "id": "highlights", "name": "Highlights (full head)", "price": 4500, "priceMax": 7000, "duration": "3 hrs" }
+      ]
+    },
+    {
+      "id": "smoothening", "name": "Smoothening & Keratin", "note": "Price depends on hair length", "image": "photo-1560066984-138dadb4c035",
+      "options": [
+        { "id": "smoothening", "name": "Smoothening", "price": 4500, "priceMax": 8000 },
+        { "id": "keratin", "name": "Keratin treatment", "price": 6000, "priceMax": 10000 },
+        { "id": "rebonding", "name": "Rebonding", "price": 5000, "priceMax": 9000 }
+      ]
+    }
+  ]
+}

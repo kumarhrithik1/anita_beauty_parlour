@@ -1,0 +1,42 @@
+{
+  "slug": "nail-art",
+  "name": "Nail Art",
+  "icon": "💅",
+  "order": 4,
+  "intro": "Bridal nails, gel nails, French nails and custom designs.",
+  "image": "photo-1604654894610-df63bc536371",
+  "types": [
+    {
+      "id": "bridal", "name": "Bridal nails", "note": "Matched to your outfit", "image": "photo-1604654894610-df63bc536371",
+      "options": [
+        { "id": "gel-set", "name": "Bridal gel set", "price": 2200, "duration": "75 min" },
+        { "id": "acrylic", "name": "Acrylic bridal set", "price": 3200, "duration": "2 hrs" },
+        { "id": "hands-feet", "name": "Hands & feet bridal", "price": 4200, "duration": "2.5 hrs" }
+      ]
+    },
+    {
+      "id": "gel", "name": "Gel nails", "note": "Glossy, long-lasting", "image": "photo-1610992015732-2449b76344bc",
+      "options": [
+        { "id": "hands", "name": "Gel polish, hands", "price": 900, "duration": "45 min" },
+        { "id": "hands-feet", "name": "Gel polish, hands & feet", "price": 1600, "duration": "90 min" },
+        { "id": "removal", "name": "Gel removal", "price": 300 }
+      ]
+    },
+    {
+      "id": "custom", "name": "Custom nail art", "note": "Bring a reference photo", "image": "photo-1632345031435-8727f6897d53",
+      "options": [
+        { "id": "simple", "name": "Simple design, full set", "price": 1500 },
+        { "id": "detailed", "name": "Detailed design, full set", "price": 2500 },
+        { "id": "chrome-3d", "name": "Chrome / 3D art", "price": 3500 }
+      ]
+    },
+    {
+      "id": "french", "name": "French nails", "note": "Clean and classic", "image": "photo-1604654894610-df63bc536371",
+      "options": [
+        { "id": "classic", "name": "Classic French", "price": 1300, "duration": "60 min" },
+        { "id": "ombre", "name": "French ombre", "price": 1600, "duration": "75 min" },
+        { "id": "glitter", "name": "French + glitter", "price": 1800, "duration": "75 min" }
+      ]
+    }
+  ]
+}
